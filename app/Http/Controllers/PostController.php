@@ -13,7 +13,7 @@ class PostController extends Controller
     {
         try {
             $posts = PostService::PostList();
-            return view('modules.post.index', compact('post'));
+            return view('modules.post.index', compact('posts'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -44,20 +44,26 @@ class PostController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    /* Show the form for editing the specified resource. */
     public function edit(string $id)
     {
-        //
+        try {
+            $edit = PostService::PostFindByID($id);
+            return view('modules.post.createUpdate', compact('edit'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    /* Update the specified resource in storage. */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            PostService::PostUpdate($request, $id);
+            return redirect()->route('post.index');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -65,6 +71,11 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            PostService::PostFindByID($id)->delete();
+            return redirect()->route('post.index');
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

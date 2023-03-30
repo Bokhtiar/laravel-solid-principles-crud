@@ -1,6 +1,11 @@
 <div class="container">
 
-    <form action="@route('post.store')" method="POST" enctype="multipart/form-data">
+    @if (@$edit)
+        <form action="@route('post.update', $edit->post_id)" method="POST" enctype="multipart/form-data">
+            @method('PUT')    
+    @else
+        <form action="@route('post.store')" method="POST" enctype="multipart/form-data">
+    @endif
         @csrf
         
         @component('components.input', [

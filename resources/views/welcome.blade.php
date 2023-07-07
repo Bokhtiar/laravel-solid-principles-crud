@@ -6,6 +6,24 @@
 @endsection
 @section('content')
 
+
+
+    @php
+        $month = Carbon\Carbon::now()->month;
+        if ($month > 6) {
+            echo 'a';
+            $current_year = Carbon\Carbon::now()->year;
+            $next_year = Carbon\Carbon::now()->year + 1;
+            echo $current_year . ' - ' . $next_year;
+        } else {
+            echo 'b';
+            $current_year = Carbon\Carbon::now()->year - 1;
+            $next_year = Carbon\Carbon::now()->year;
+            echo $current_year .'-'. $next_year;
+        }
+    @endphp
+
+
     <select class="form-control js-example-tokenizer" multiple="multiple">
         <option>orange</option>
         <option>white</option>
@@ -25,7 +43,5 @@
             tokenSeparators: [',', ' ']
         })
     </script>
-
-   
 @endsection
 @endsection

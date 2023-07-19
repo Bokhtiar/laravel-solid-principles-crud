@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostEvent;
 use App\Http\Requests\PostRequestValidator;
 use App\Services\PostService;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class PostController extends Controller
     public function store(PostRequestValidator $request)
     {
         try {
+            event(new PostEvent($request));
             PostService::PostCreate($request);
             return back();
         } catch (\Throwable $th) {

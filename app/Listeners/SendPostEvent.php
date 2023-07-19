@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\PostEvent;
 use App\Mail\UserMail;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -22,6 +23,10 @@ class SendPostEvent
      */
     public function handle(PostEvent $request): void
     {
-        \Mail::to('bokhtiartoshar1@gmail.com')->send( new UserMail($request));
+        $users = User::all();
+        foreach ($users as $user) {
+            \Mail::to($user->email)->send(new UserMail($request));    
+        }
+        
     }
 }

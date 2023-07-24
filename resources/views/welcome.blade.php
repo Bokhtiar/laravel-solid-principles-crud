@@ -19,7 +19,7 @@
             echo 'b';
             $current_year = Carbon\Carbon::now()->year - 1;
             $next_year = Carbon\Carbon::now()->year;
-            echo $current_year .'-'. $next_year;
+            echo $current_year . '-' . $next_year;
         }
     @endphp
 
@@ -35,25 +35,33 @@
 
     <h3>Payment information</h3>
     <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Order, product & user </th>
-      <th scope="col">Name</th>
-      <th scope="col">Txid</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($payments as $item)
-    <tr>
-      <th scope="row">1</th>
-      <td>{{ $item->order_id }} {{ $item->name }} {{ $item->email }}</td>
-      <td> {{$item->name}} </td>
-      <td>{{ $item->txid}}</td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Order, product & user </th>
+                <th scope="col">Name</th>
+                <th scope="col">Txid</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($payments as $item)
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ $item->order_id }} {{ $item->name }} {{ $item->email }}</td>
+                    <td> {{ $item->name }} </td>
+                    <td>{{ $item->txid }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    {{-- liveware product --}}
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+    @livewire('products')
 
 
 @section('js')

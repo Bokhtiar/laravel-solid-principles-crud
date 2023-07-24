@@ -28,6 +28,7 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
                 <td>
+                <button wire:click="show({{ $product->product_id }})" class="btn btn-primary btn-sm">Show</button>
                 <button wire:click="edit({{ $product->product_id }})" class="btn btn-primary btn-sm">Edit</button>
                     <button wire:click="delete({{ $product->product_id }})" class="btn btn-danger btn-sm">Delete</button>
                 </td>

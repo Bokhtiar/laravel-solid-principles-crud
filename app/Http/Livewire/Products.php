@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Products extends Component
 {
-    public $products, $product_id, $name, $price;
+    public $products, $product_id, $name, $price, $show;
     public $updateMode = false;
     public function render()
     {
@@ -31,8 +31,9 @@ class Products extends Component
      *
      * @var array
      */
-    public function store()
+    public function product_store()
     {
+
         $validatedDate = $this->validate([
             'name' => 'required',
             'price' => 'required',
@@ -40,9 +41,16 @@ class Products extends Component
 
         Product::create($validatedDate);
 
+
         session()->flash('message', 'Product Created Successfully.');
 
         $this->resetInputFields();
+    }
+
+
+    public function show($id)
+    {
+        return redirect()->to("/product/$id");
     }
 
     /**

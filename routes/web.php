@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProductController;
+use App\Http\Livewire\ProductForm;
+use App\Http\Livewire\Products;
+use App\Http\Livewire\ShowProduct;
 use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +37,11 @@ Route::get('/', function () {
 
 /* post routes */
 Route::resource('post', PostController::class);
+
+
+/* livewire products */
+Route::get('product', [ProductController::class, 'index']);
+Route::get('product/create', [ProductController::class, 'create']);
+
+Route::get('contact/form', [ProductController::class, 'contact_form']);
+Route::get('/product/{id}', ShowProduct::class);
